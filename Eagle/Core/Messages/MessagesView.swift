@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MessagesView.swift
 //  Eagle
 //
 //  Created by Dalveer singh on 13/06/22.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MessagesView: View {
     var body: some View {
-        FeedView()
+        Text("MessagesView!")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MessagesView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MessagesView()
     }
 }
