@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct NewTweetView: View {
+    @State var caption = "Hello"
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack{
             HStack{
                 Button {
-                    print("cancel")
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Cancel")
                         .foregroundColor(Color(.systemBlue))
@@ -34,10 +36,11 @@ struct NewTweetView: View {
                 }
             }
             .padding()
-            HStack{
+            HStack(alignment:.top){
                 Circle()
                     .frame(width:64,height: 64)
 //                14434
+                TextArea("This is placeholder", $caption)
             }
         }
     }
