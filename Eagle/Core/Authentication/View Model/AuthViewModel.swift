@@ -10,11 +10,14 @@ import Firebase
 import FirebaseAuth
 class AuthViewModel:ObservableObject{
     @Published var userSession:FirebaseAuth.User?
+    @Published var currentUser:User?
     @Published var didAuthenticateUser = false
     private var tempUserSession:FirebaseAuth.User?
+    private let service = UserService()
     init(){
         self.userSession = Auth.auth().currentUser
         print("DEBUG : User session : \(self.userSession?.uid)")
+        self.fetchUser()
     }
     func login(withEmail email:String,_ password:String)
     {
@@ -62,6 +65,13 @@ class AuthViewModel:ObservableObject{
             Firestore.firestore().collection("users").document(uid).updateData(["profileImageUrl":profileImageUrl]) { _ in
                 self.userSession = self.tempUserSession
             }
+        }
+    }
+    func fetchUser(){
+        guard let uid = self.userSession?.uid else {return }
+        
+        service.fetchUser(withUid: uid) { user in
+            self.currentUser = user
         }
     }
 }

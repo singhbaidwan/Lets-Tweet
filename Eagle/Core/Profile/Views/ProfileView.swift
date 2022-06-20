@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct ProfileView: View {
     @State private var selectedFilter:TweetFilterVIewModel = .tweets
     @Environment(\.presentationMode) var mode
     @Namespace var animation
+    private let user:User
+    init(user:User)
+    {
+        self.user = user
+    }
     var body: some View {
         VStack(alignment:.leading){
             HeaderView
@@ -25,7 +30,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(user: User(id: NSUUID().uuidString, username: "hell", fullname: "fff", profileImageUrl: "https://google.com", email: "nowat@123.com"))
     }
 }
 
@@ -43,10 +48,13 @@ extension ProfileView{
                         .resizable()
                         .frame(width: 20, height: 16)
                         .foregroundColor(.white)
-                        .offset(x: 16, y: 12)
+                        .offset(x: 16, y: -16)
                 }
                 
-                Circle()
+                KFImage(URL(string: user.profileImageUrl))
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(Circle() )
                     .frame(width: 72, height: 72)
                     .offset(x: 16, y: 25)
             }
@@ -77,12 +85,12 @@ extension ProfileView{
     var userInfoDetails:some View{
         VStack(alignment:.leading,spacing: 4){
             HStack{
-                Text("Dalveer Singh")
+                Text(user.fullname)
                     .font(.title2).bold()
                 Image(systemName: "checkmark.seal.fill")
                     .foregroundColor(Color(.systemBlue))
             }
-            Text("@Dalveer")
+            Text("@\(user.username)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             Text("This is Dalveer singh Bio")
