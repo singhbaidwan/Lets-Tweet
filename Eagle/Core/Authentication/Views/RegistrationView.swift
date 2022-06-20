@@ -16,6 +16,7 @@ struct RegistrationView: View {
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack{
+            NavigationLink(destination: ProfilePhotoSelectorView(), isActive: $viewModel.didAuthenticateUser, label: {})
             VStack(alignment:.leading)
             {
                 HStack(){Spacer()}
