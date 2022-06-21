@@ -29,6 +29,7 @@ class AuthViewModel:ObservableObject{
             }
             guard let user = result?.user else {return }
             self.userSession = user
+            self.fetchUser()
             print("DEBUG : did log user in")
             
         }
@@ -64,6 +65,7 @@ class AuthViewModel:ObservableObject{
         ImageUploader.uploadImage(image: image) { profileImageUrl in
             Firestore.firestore().collection("users").document(uid).updateData(["profileImageUrl":profileImageUrl]) { _ in
                 self.userSession = self.tempUserSession
+                self.fetchUser()
             }
         }
     }

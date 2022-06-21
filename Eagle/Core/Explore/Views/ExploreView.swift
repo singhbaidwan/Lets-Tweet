@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExploreView: View {
     var body: some View {
-        NavigationView{
+       
             VStack{
                 ScrollView{
                     LazyVStack{
@@ -26,7 +26,6 @@ struct ExploreView: View {
             }
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
-        }
         
     }
 }
