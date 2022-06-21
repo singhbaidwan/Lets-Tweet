@@ -6,32 +6,46 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct TweetsRowView: View {
+    let tweet:Tweet
     var body: some View {
         VStack(alignment:.leading){
-            HStack(alignment:.top,spacing: 12){
-                // User Image
-                Circle().frame(width: 60, height: 60)
-                    .foregroundColor(Color(.systemBlue))
-                // User info &tweet
-                VStack(alignment:.leading,spacing: 4){
-                    HStack{
-                        
-                        Text("Name")
-                            .font(.subheadline).bold()
-                        Text("@avenger")
-                            .foregroundColor(.gray)
-                            .font(.caption)
-                        Text("49 weeks")
-                            .foregroundColor(.gray)
-                            .font(.caption)
+            if let user = tweet.user
+            {
+                HStack(alignment:.top,spacing: 12){
+                    // User Image
+                    NavigationLink(destination: ProfileView(user: user)) {
+                        KFImage(URL(string: user.profileImageUrl))
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(Circle())
+                            .frame(width: 60, height: 60)
                     }
-                    // Tweet
-                    Text("I am a Avenger fan")
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
+                    
+                        
+                    // User info &tweet
+                    VStack(alignment:.leading,spacing: 4){
+                        HStack{
+                            
+                            
+                            Text(user.fullname)
+                                .font(.subheadline).bold()
+                            Text("@\(user.username )")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                            Text("49 weeks")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                            
+                        }
+                        // Tweet
+                        Text(tweet.caption)
+                            .font(.subheadline)
+                            .multilineTextAlignment(.leading)
+                    }
                 }
+                
             }
             // action buttons
             HStack{
@@ -74,9 +88,9 @@ struct TweetsRowView: View {
         }
     }
 }
-
-struct TweetsRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        TweetsRowView()
-    }
-}
+//
+//struct TweetsRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TweetsRowView()
+//    }
+//}
