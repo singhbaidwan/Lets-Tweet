@@ -1,7 +1,7 @@
 # Lets-Tweet
 ## Getting Started ##
 
-1. git clone https://github.com/singhbaidwan/Netflix-Clone <br />
+1. git clone [https://github.com/singhbaidwan/Lets-Tweet](https://github.com/singhbaidwan/Lets-Tweet) <br />
 2. cd Eagle.<br />
 ## Screenshots ##
 
