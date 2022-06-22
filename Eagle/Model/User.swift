@@ -4,6 +4,7 @@
 //
 //  Created by Dalveer singh on 20/06/22.
 //
+import Firebase
 import FirebaseFirestoreSwift
 struct User:Identifiable,Decodable{
     @DocumentID var id:String?
@@ -11,4 +12,5 @@ struct User:Identifiable,Decodable{
     let fullname:String
     let profileImageUrl:String
     let email:String
+    var isCurrentUser:Bool{return Auth.auth().currentUser?.uid == id}
 }
